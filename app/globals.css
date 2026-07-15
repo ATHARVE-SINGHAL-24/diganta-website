@@ -1,26 +1,170 @@
-@import "tailwindcss";
+/* ==========================================================================
+   DIGANTA GLOBAL DESIGN SYSTEM
+   Theme: Futuristic Space / Premium Tech
+   Color Palette: Deep Space (#050816), Nova Cyan (#00E5FF)
+   ========================================================================== */
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* --- 1. CORE ARCHITECTURE & RESET --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #050816;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+/* --- 2. TYPOGRAPHY MATRIX --- */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+}
+
+p {
+  color: #8892b0;
+  font-weight: 300;
+}
+
+/* --- 3. GLASSMORPHISM INTERFACE ENGINE --- */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 
+              0 0 30px rgba(0, 229, 255, 0.03);
+  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel:hover {
+  border-color: rgba(0, 229, 255, 0.4);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 
+              0 0 40px rgba(0, 229, 255, 0.1);
+  transform: translateY(-4px);
+}
+
+/* --- 4. HARDWARE-ACCELERATED INTERACTIVE BUTTONS --- */
+.btn-neon {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid #00E5FF;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  padding: 16px 36px;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+  transition: background-color 0.3s ease, 
+              box-shadow 0.3s ease, 
+              transform 0.2s ease, 
+              border-color 0.3s ease;
+  outline: none;
+}
+
+.btn-neon:hover {
+  background: rgba(0, 229, 255, 0.05);
+  border-color: #ffffff;
+  box-shadow: 0 0 35px rgba(0, 229, 255, 0.4), 
+              inset 0 0 15px rgba(0, 229, 255, 0.1);
+  transform: scale(1.03);
+}
+
+.btn-neon:active {
+  transform: scale(0.98);
+}
+
+/* --- 5. DATA INPUT & CAPTURE LAYER --- */
+.input-field {
+  width: 100%;
+  padding: 14px;
+  backgroundColor: rgba(5, 8, 22, 0.6);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 1rem;
+  outline: none;
+  text-align: center;
+  letter-spacing: 0.1em;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-field:focus {
+  border-color: #00E5FF;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+}
+
+/* --- 6. PURE CSS ANIMATIONS --- */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 20px rgba(0, 229, 255, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(0, 229, 255, 0.4); }
+  100% { box-shadow: 0 0 20px rgba(0, 229, 255, 0.2); }
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* Utility classes to bind animations */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-scroll {
+  animation: scroll-bounce 1.8s ease-in-out infinite;
+}
+
+/* --- 7. RESPONSIVE DESIGN & LAYOUT INTERCEPTIONS --- */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 3.2rem !important;
+    letter-spacing: 0.2em !important;
+  }
+  
+  h2 {
+    font-size: 1.2rem !important;
+    letter-spacing: 0.3em !important;
+  }
+
+  .glass-panel {
+    padding: 30px 20px !important;
+  }
+
+  .btn-neon {
+    padding: 14px 28px;
+    font-size: 0.85rem;
+  }
 }
